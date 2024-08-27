@@ -29,6 +29,10 @@ def eliminar(matriz):
                 matriz_copia.pop(i)
     return matriz_copia
 
+def ordenar(matriz):
+    electro = [[id,nombre[:5],precio] for id,nombre,precio in electrodomesticos]
+    electro_ordenado = sorted(electro, key=lambda x:(x[2]),reverse=True)
+    print(electro_ordenado)
 
 
 #Programa Principal
@@ -40,10 +44,9 @@ electrodomesticos=[
 [5,"horno electrico",110000],
 [6,"secadora",123000]
 ]
-electro_recortado = [[id,nombre[:5],precio] for id,nombre,precio in electrodomesticos]
-electro_ordenado = sorted(electro_recortado, key=lambda x:(-x[2],x[1]))
+
 #Menu C.R.U.D
-print("1-Ingresar un nuevo electrodomestico\n2-Imprimir matriz\n3-Actualizar precio\n4-Eliminar electrodomestico\n(-1 para salir)\n")
+print("1-Ingresar un nuevo electrodomestico\n2-Imprimir matriz\n3-Actualizar precio\n4-Eliminar electrodomestico\n5-Ordenar\n(-1 para salir)\n")
 opcion = int(input())
 while opcion != -1:
     if opcion == 1:
@@ -54,4 +57,6 @@ while opcion != -1:
         actualizar_precio(electrodomesticos)
     if opcion == 4:
         electrodomesticos = eliminar(electrodomesticos)
-    opcion = int(input("1-Ingresar un nuevo electrodomestico\n2-Imprimir matriz\n3-Actualizar precio\n4-Eliminar electrodomestico\n(-1 para salir)\n"))
+    if opcion == 5:
+        ordenar(electrodomesticos)
+    opcion = int(input("1-Ingresar un nuevo electrodomestico\n2-Imprimir matriz\n3-Actualizar precio\n4-Eliminar electrodomestico\n5-Ordenar\n(-1 para salir)\n"))
