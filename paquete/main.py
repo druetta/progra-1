@@ -1,5 +1,6 @@
 import crudStock
 import crudCliente
+import validaciones as v
 #Programa Principal
 electrodomesticos=[ 
     [1,"heladera",110000, 9],
@@ -23,7 +24,7 @@ historial_compra = []
 ingreso = int(input("1-Gestion de datos 2-Compras "))#Administrar datos 
 if ingreso == 1:
     if input("contraseña: ") == "admin": #Controlar acceso
-        #Menu C.R.U.D de stock
+        #C.R.U.D de stock
         print("1-Ingresar un nuevo electrodomestico")
         print("2-Imprimir matriz")
         print("3-Actualizar precio")
@@ -32,19 +33,21 @@ if ingreso == 1:
         opcion = int(input())
         while opcion != -1:
             if opcion == 1:
-                producto = int(input("heladera/horno/microondas/lavarropas/horno electrico/secadora (1-6)"))
-                crudStock.crear(electrodomesticos,producto)
-                print("Producto agregado")
+                print("heladera | horno | microondas | lavarropas | horno electrico | secadora (1-6) ")
+                crudStock.crear(electrodomesticos)
             if opcion == 2:
                 crudStock.leer(electrodomesticos) 
             if opcion == 3:
+                print("heladera | horno | microondas | lavarropas | horno electrico | secadora (1-6) ")
                 crudStock.actualizar_precio(electrodomesticos)
             if opcion == 4:
+                print("heladera | horno | microondas | lavarropas | horno electrico | secadora (1-6) ")
                 electrodomesticos = crudStock.eliminar(electrodomesticos)
             if opcion == 5:
                 crudStock.ordenar(electrodomesticos)
             opcion = int(input("Desea hacer algo mas(1-5) o -1 "))
 else:
+    #C.R.U.D Clientes
     print("1-Nuevo cliente")
     print("2-Imprimir matriz clientes")
     print("3-Actualizar email-telefono")
@@ -61,7 +64,10 @@ else:
             if opcion_cliente == 4:
                 cliente = crudCliente.eliminar(clientes)
             if opcion_cliente == 5:            
-                dni = input("DNI XX.XXX.XXX" )
-                compra = int(input("heladera/horno/microondas/lavarropas/horno electrico/secadora (1-6)"))
-                historial_compra.append([dni,compra])
-            opcion_cliente = int(input("Desea hacer algo mas(1-5) o -1 para salir "))
+                dni = input("DNI (XX.XXX.XXX) ")
+                while not v.validar_dni(dni):
+                    dni = input("Ingrese un dni valido (XX.XXX.XXX) ")
+                compra = int(input("heladera | horno | microondas | lavarropas | horno electrico | secadora (1-6) "))
+                if compra >= 1 and compra <= 6:
+                    historial_compra.append([dni,compra])
+            opcion_cliente = int(input("Desea hacer algo mas?(1-5) o -1 para salir "))

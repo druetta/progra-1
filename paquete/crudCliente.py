@@ -1,5 +1,9 @@
 import validaciones 
 def crear(diccionario):
+    '''
+    pre: recibe diccionario por parametro pide 4 datos y los valida
+    pos: devuelve diccionario con nuevo cliente agregado
+    '''
     dni = input("DNI (XX.XXX.XXX): ")
     while not validaciones.validar_dni(dni):
         dni = input("Ingrese el formato correcto(XX.XXX.XXX)")
@@ -14,11 +18,19 @@ def crear(diccionario):
     return diccionario
 
 def leer(diccionario):
-    print(f'{"DNI":>12} {"Nombre":>20} {"Email":>25} {"Teléfono":>15}')
-    for dni, clave in diccionario.items():
-        print(f'{dni:>12} {clave["nombre"]:>15} {clave["email"]:>20} {clave["telefono"]:>15}')
+    '''
+    pre: recibe diccionario por parametro, itera sobre los pares del diccionario con clave,valor
+    pos: imprime el diccionario de manera centrada
+    '''
+    print(f'{"DNI":^12} {"Nombre":^20} {"Email":^25} {"Teléfono":^15}')
+    for dni, valor in diccionario.items():
+        print(f'{dni:^12} {valor["nombre"]:^15} {valor["email"]:^20} {valor["telefono"]:^15}')
 
 def actualizar_cliente(diccionario):
+    '''
+    pre: pide clave DNI, si la encuentra pide otros datos
+    pos: devuelve diccionario con datos actualizados
+    '''
     dni = input("DNI: ")
     if dni in diccionario:
         email = input("Nuevo Email: ")
@@ -30,6 +42,10 @@ def actualizar_cliente(diccionario):
     return diccionario
 
 def eliminar(diccionario):
+    '''
+    pre: pide clave DNI, si la encuentra borra la linea clave-valor
+    pos: devuelve diccionario actualizado
+    '''
     dni = input("DNI: ")
     if dni in diccionario:
         del diccionario[dni]
@@ -37,5 +53,3 @@ def eliminar(diccionario):
     else:
         print("No se encontro el cliente")
     return diccionario
-
-
